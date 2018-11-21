@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page" *ngIf="favMovies">
+
+  <ion-card *ngFor="let favMovie of favMovies" (click)="movieSelected()" [routerLink]="'/movie/' + favMovie.id">
+    <img [src]="imageUrl + favMovie.imagePath" />
+    <div class="card-title">{{favMovie.name}}</div>
+  </ion-card>
+
+</ion-content>

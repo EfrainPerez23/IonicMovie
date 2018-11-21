@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="movies">
+  <ion-searchbar (keyup.enter)="getMoviesPage()" [(ngModel)]="movieName" #name (ionInput)="movieName = name.value"></ion-searchbar>
+  <ion-fab vertical="center" horizontal="center" slot="fixed">
+    <ion-fab-button>
+      {{movies.response.page}}
+    </ion-fab-button>
+    <ion-fab-list side="top" *ngIf="movies.response.total_pages !== movies.response.page" (click)="getMoviesPage(movies.response.page + 1)">
+      <ion-fab-button>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start" *ngIf="movies.response.page > 1" (click)="getMoviesPage(movies.response.page - 1)">
+      <ion-fab-button>
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="bottom" (click)="movieName = ''; getMoviesPage();">
+      <ion-fab-button class="refresh--button"><ion-icon name="refresh"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <div *ngIf="movies.response.results.length > 0">
+    <ion-card *ngFor="let movie of movies.response.results" tappable>
+      <img [src]="imageUrl + movie.poster_path" (click)="movieSelected()" [routerLink]="'/movie/' + movie.id" />
+
+      <ion-card-content (click)="movieSelected()" [routerLink]="'/movie/' + movie.id">
+        <ion-card-title>
+          {{movie.title}}
+        </ion-card-title>
+      </ion-card-content>
+
+      <ion-item (click)="setFavorite(movie)">
+        <ion-icon [name]="movie.favorite ? 'heart' : 'heart-empty'" item-start style="color: #d03e84"></ion-icon>
+        Favorite
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name='star' item-start style="color: #ffce00"></ion-icon>
+        Popularity
+        <ion-badge item-end>{{movie.vote_average}} / 10.0</ion-badge>
+      </ion-item>
+
+    </ion-card>
+  </div>
+  <div *ngIf="movies.response.results.length === 0" class="no--results">
+    <h3>No hay resultados disponibles</h3>
+  </div>
+
+</ion-content>

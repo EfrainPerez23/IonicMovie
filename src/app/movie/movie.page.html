@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{movie?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="movie">
+  <div class="col video-wrapper">
+    <youtube-player [videoId]="videoId" [height]="250" [width]="'100%'"></youtube-player>
+  </div>
+  <div padding>
+    <h1>{{movie.title}}</h1>
+    <p>{{movie.overview}}</p>
+    <div>
+      <ion-item>
+        <ion-icon name='star' item-start style="color: #ffce00"></ion-icon>
+        Popularity
+        <ion-badge item-end>{{movie.vote_average}} / 10.0</ion-badge>
+      </ion-item>
+    </div>
+    <div>
+        <ion-button color="primary" class="back--button" (click)="goBack()">Back</ion-button>
+    </div>
+  </div>
+</ion-content>

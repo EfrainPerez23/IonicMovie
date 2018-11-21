@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      User
+    </ion-title>
+  </ion-toolbar>
+  <div padding>
+    <ion-segment [(ngModel)]="option">
+      <ion-segment-button value="1">
+        Sign Up
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        Sign In
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="option">
+    <ion-list *ngSwitchCase="1">
+      <app-sign-up></app-sign-up>
+    </ion-list>
+    <ion-list *ngSwitchDefault>
+        <app-sign-in></app-sign-in>
+    </ion-list>
+  </div>
+</ion-content>

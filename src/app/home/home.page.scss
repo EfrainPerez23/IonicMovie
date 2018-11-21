@@ -1,0 +1,36 @@
+
+// colors variables
+$content: #cbcbcb;
+$card: white;
+ion-content {
+  ion-searchbar {
+    position: fixed;
+    z-index: 1;
+    background: #dedede;
+    left: 0;
+    top: 43px;
+  }
+  ion-card {
+    background: $card;
+    box-shadow: 1px -1px 16px 9px rgba(0,0,0,.12);
+    &:first-of-type {
+      margin-top: 60px;
+    }
+  }
+  ion-badge {
+    margin-left: 15px;
+  }
+  ion-fab {
+    top: 95%;
+    left: 90%;
+    .refresh--button {
+      position: relative;
+      top: -180px;
+    }
+  }
+
+  .no--results {
+    margin-top: 50%;
+    text-align: center;
+  }
+}
